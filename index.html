@@ -3,48 +3,68 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pembayaran QRIS - Kiheo</title>
+    <title>Pembayaran - Kiheo</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
     <div class="payment-card">
+        <!-- Bagian Header -->
         <div class="header">
-            <h1>Pembayaran Kiheo</h1>
-            <p>NMID: ID1022202979418</p>
+            <div class="red-box"></div>
+            <h1>root@kiheo:~# <span class="cursor">_</span></h1>
         </div>
 
-        <div class="qris-container">
+        <!-- Opsi 1: QRIS -->
+        <div class="section-label">1. SCAN QRIS:</div>
+        <div class="content-box qris-box">
+            <p class="subtitle">NMID: ID1022202979418</p>
             <img src="qrkk.png" alt="QRIS Kiheo" class="qris-image">
         </div>
 
-        <div class="instructions">
-            <h3>Cara Bayar dengan QRIS:</h3>
-            <div class="step-container">
-                <div class="step">
-                    <div class="step-icon">1</div>
-                    Buka Aplikasi<br>M-Banking/E-Wallet
-                </div>
-                <div class="step">
-                    <div class="step-icon">2</div>
-                    Scan QR Code<br>di atas
-                </div>
-                <div class="step">
-                    <div class="step-icon">3</div>
-                    Masukkan Nominal<br>& Bayar
-                </div>
-            </div>
+        <!-- Cara Bayar (Gaya Plain Text dengan Animasi Mengetik) -->
+        <div class="plain-terminal">
+            <div class="terminal-line line-0">root@kiheo: $ ./cara_bayar</div>
+            <div class="terminal-line line-1">✓ 1. Buka M-Banking/E-Wallet</div>
+            <div class="terminal-line line-2">✓ 2. Scan QR Code di atas</div>
+            <div class="terminal-line line-3">✓ 3. Masukkan Nominal</div>
         </div>
 
-        <div class="thank-you-note">
-            <span>Terima Kasih!</span>
-            Atas kepercayaan Anda berbelanja di Kiheo.
+        <!-- Opsi 2: Transfer DANA -->
+        <div class="section-label">2. ALTERNATIF TRANSFER:</div>
+        <div class="content-box dana-box">
+            <p class="subtitle">Jika QRIS gagal, transfer ke <b>DANA</b></p>
+            
+            <a href="dana://" class="btn-action" onclick="bukaDanSalin(event)">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/7/72/Logo_dana_blue.svg" alt="DANA" class="dana-logo">
+                
+            </a>
+            <p class="note">*(Klik tombol di atas untuk menyalin nomor otomatis)</p>
         </div>
 
-        <div class="footer">
-            SATU <span>QRIS</span> UNTUK SEMUA
+        <!-- Ucapan Terima Kasih (Plain Text) -->
+        <div class="thank-you-plain">
+            <h3>TERIMA KASIH!_</h3>
+            <p>Atas kepercayaan Anda berbelanja di Kiheo.</p>
+        </div>
+
+        <!-- Kotak Cyan (SATU QRIS UNTUK SEMUA) -->
+        <div class="cyan-box">
+            SATU <b>QRIS</b> UNTUK SEMUA
         </div>
     </div>
 
+    <!-- Script Copy DANA -->
+    <script>
+        function bukaDanSalin(event) {
+            const noDana = "083170500002";
+            
+            navigator.clipboard.writeText(noDana).then(() => {
+                alert("Nomor DANA " + noDana + " berhasil disalin!\n\nSilakan 'Paste' (Tempel) di aplikasi DANA dan masukkan nominal pembayaran.");
+            }).catch(err => {
+                console.error('Gagal menyalin: ', err);
+            });
+        }
+    </script>
 </body>
 </html>
