@@ -38,7 +38,7 @@
                 <span class="dot dot-red"></span>
                 <span class="dot dot-yellow"></span>
                 <span class="dot dot-green"></span>
-                <span class="terminal-title">root@kiheo: $ ./cara_bayar</span>
+                <span class="terminal-title">root@kiheo:$ ./cara_bayar</span>
             </div>
             <div class="terminal-body" id="terminal-body">
                 <!-- Teks akan diketik otomatis oleh script.js -->
@@ -48,11 +48,14 @@
         <!-- Opsi 2: Transfer DANA -->
         <div class="section-label">2. ALTERNATIF TRANSFER:</div>
         <div class="content-box dana-box">
-            <p class="subtitle">Jika QRIS gagal, transfer ke <b>DANA</b></p>
-            <a href="dana://" class="btn-action" onclick="bukaDanSalin(event)">
+            <p class="subtitle">Jika QRIS gagal, silahkan transfer ke <b>DANA</b></p>
+            
+            <!-- Link Buka Aplikasi DANA dihapus, sekarang hanya untuk Salin -->
+            <a href="#" class="btn-action" onclick="bukaDanSalin(event)">
                 <img src="https://upload.wikimedia.org/wikipedia/commons/7/72/Logo_dana_blue.svg" alt="DANA" class="dana-logo">
             </a>
-            <p class="note">*(Klik tombol di atas untuk menyalin nomor otomatis)</p>
+            
+            <p class="note">*(Klik tombol di atas untuk menyalin nomor)</p>
             <p class="note">*(A/n <b>KIKI HENDRI PRASETYO</b>)</p>
         </div>
 
@@ -69,7 +72,7 @@
     </div> 
     <!-- AKHIR KOTAK UTAMA -->
 
-    <!-- FOOTER PALING BAWAH (KOTAK TERPISAH) -->
+    <!-- FOOTER PALING BAWAH -->
     <div class="footer-container">
         <div class="footer-box">
             &copy;2026 // KIHEO<br>
