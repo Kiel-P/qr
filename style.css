@@ -1,15 +1,28 @@
 @import url('https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&display=swap');
 
+/* VARIABEL TEMA TERANG */
 :root {
     --bg-color: #f4f4f5;
     --card-bg: #ffffff;
+    --text-color: #000000;
     --border-color: #000000;
     --primary-yellow: #ffc933;
-    --cyan-color: #06b6d4;
+    --mint-color: #6ee7b7; /* Warna Mint/Teal seperti tombol Salin */
     --red-color: #ef4444;
+    --box-bg: #ffffff;
     --shadow: 6px 6px 0px #000000;
     --radius: 8px;
     --border-thick: 3px;
+}
+
+/* VARIABEL TEMA GELAP */
+body.dark-mode {
+    --bg-color: #121212;
+    --card-bg: #1e1e1e;
+    --text-color: #ffffff;
+    --border-color: #ffffff;
+    --box-bg: #2d2d2d;
+    --shadow: 6px 6px 0px #ffffff;
 }
 
 * {
@@ -21,11 +34,13 @@
 
 body {
     background-color: var(--bg-color);
+    color: var(--text-color);
     display: flex;
     justify-content: center;
     align-items: center;
     min-height: 100vh;
     padding: 20px;
+    transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 .payment-card {
@@ -36,15 +51,23 @@ body {
     width: 100%;
     padding: 25px;
     position: relative;
+    transition: all 0.3s ease;
 }
 
-/* Header */
+/* --- HEADER & TOMBOL TEMA --- */
 .header {
     display: flex;
     align-items: center;
+    justify-content: space-between; /* Membuat elemen berjauhan (kiri dan kanan) */
     border-bottom: 2px solid var(--border-color);
     padding-bottom: 15px;
     margin-bottom: 25px;
+    width: 100%;
+}
+
+.header-left {
+    display: flex;
+    align-items: center;
     gap: 15px;
 }
 
@@ -56,9 +79,9 @@ body {
 }
 
 .header h1 {
-    font-size: 1.2rem;
+    font-size: 1.1rem; /* Ukuran font disesuaikan agar rapi di HP */
     font-weight: bold;
-    color: var(--border-color);
+    color: var(--text-color);
 }
 
 .cursor {
@@ -66,20 +89,40 @@ body {
     color: var(--primary-yellow);
 }
 
-/* Section Label */
+/* Tombol Switch Mode */
+.theme-toggle {
+    background: var(--card-bg);
+    border: 2px solid var(--border-color);
+    box-shadow: 3px 3px 0px var(--border-color);
+    padding: 6px 14px;
+    border-radius: 20px;
+    cursor: pointer;
+    font-size: 1.1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s ease;
+    flex-shrink: 0; /* Mencegah tombol mengecil di layar sempit */
+}
+
+.theme-toggle:active {
+    transform: translate(2px, 2px);
+    box-shadow: 0px 0px 0px var(--border-color);
+}
+
+/* --- LAYOUT UMUM --- */
 .section-label {
     font-size: 1rem;
     font-weight: bold;
     margin-bottom: 10px;
-    color: var(--border-color);
+    color: var(--text-color);
 }
 
-/* Kotak Konten */
 .content-box {
     border: var(--border-thick) solid var(--border-color);
     border-radius: var(--radius);
     padding: 15px;
-    background: #fff;
+    background: var(--box-bg);
     margin-bottom: 20px;
 }
 
@@ -87,6 +130,7 @@ body {
     font-size: 0.85rem;
     margin-bottom: 15px;
     text-align: center;
+    color: var(--text-color);
 }
 
 .qris-box {
@@ -100,9 +144,9 @@ body {
     border-radius: 4px;
 }
 
-/* --- KOTAK TERMINAL HITAM (GAYA GAMBAR REFERENSI) --- */
+/* --- KOTAK TERMINAL --- */
 .terminal-box {
-    background-color: #0f172a; /* Latar belakang hitam gelap terminal */
+    background-color: #0f172a !important;
     border: var(--border-thick) solid var(--border-color);
     border-radius: 12px;
     box-shadow: var(--shadow);
@@ -132,7 +176,7 @@ body {
 .dot-green { background-color: #27c93f; }
 
 .terminal-title {
-    color: #f8fafc;
+    color: #f8fafc !important;
     font-size: 0.8rem;
     font-weight: bold;
     margin-left: 5px;
@@ -140,7 +184,7 @@ body {
 
 .terminal-body {
     padding: 18px;
-    color: #e2e8f0;
+    color: #f1f5f9 !important;
     font-size: 0.8rem;
     line-height: 1.8;
     min-height: 140px;
@@ -148,15 +192,16 @@ body {
 
 .terminal-line {
     margin-bottom: 6px;
+    color: #f1f5f9 !important;
 }
 
 .text-green {
-    color: #4ade80;
+    color: #4ade80 !important;
     font-weight: bold;
 }
 
 .cursor-block {
-    color: #4ade80;
+    color: #4ade80 !important;
     animation: blink 1s step-end infinite;
 }
 
@@ -172,7 +217,7 @@ body {
     gap: 10px;
     width: 100%;
     background-color: var(--primary-yellow);
-    color: #000;
+    color: #000000;
     text-decoration: none;
     padding: 15px;
     border: var(--border-thick) solid var(--border-color);
@@ -201,7 +246,7 @@ body {
     font-size: 0.7rem;
     text-align: center;
     margin-top: 10px;
-    color: #555;
+    color: var(--text-color);
 }
 
 /* --- UCAPAN TERIMA KASIH --- */
@@ -214,17 +259,18 @@ body {
     font-size: 1.1rem;
     font-weight: bold;
     margin-bottom: 5px;
+    color: var(--text-color);
 }
 
 .thank-you-plain p {
     font-size: 0.85rem;
-    color: #000;
+    color: var(--text-color);
 }
 
-/* --- KOTAK CYAN (SATU QRIS UNTUK SEMUA) --- */
-.cyan-box {
-    background-color: var(--cyan-color);
-    color: #000000;
+/* --- KOTAK BAWAH (Warna Mint/Teal) --- */
+.mint-box {
+    background-color: var(--mint-color);
+    color: #000000; /* Teks tetap hitam agar kontras */
     text-align: center;
     padding: 12px;
     font-size: 1rem;
@@ -232,4 +278,14 @@ body {
     border: var(--border-thick) solid var(--border-color);
     border-radius: var(--radius);
     box-shadow: var(--shadow);
+}
+
+/* Penyesuaian untuk layar kecil (HP) */
+@media (max-width: 400px) {
+    .header h1 {
+        font-size: 0.9rem;
+    }
+    .header-left {
+        gap: 10px;
+    }
 }
