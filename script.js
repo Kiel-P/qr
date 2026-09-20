@@ -119,7 +119,7 @@ async function typeWriterLoop() {
             }
 
             if (i === lines.length - 1) {
-                lineDiv.innerHTML += ' <span class="cursor-block">█</span>';
+                lineDiv.innerHTML += ' <span class="cursor-block">_</span>';
             }
             
             await new Promise(r => setTimeout(r, 300)); 
