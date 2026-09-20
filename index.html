@@ -11,8 +11,14 @@
     <div class="payment-card">
         <!-- Bagian Header -->
         <div class="header">
-            <div class="red-box"></div>
-            <h1>root@kiheo:~# <span class="cursor">_</span></h1>
+            <div class="header-left">
+                <div class="red-box"></div>
+                <h1>root@kiheo:~# <span class="cursor">_</span></h1>
+            </div>
+            <!-- Tombol Switch Tema di kanan -->
+            <button class="theme-toggle" id="theme-toggle" title="Ubah Tema">
+                <span id="theme-icon">🌙</span>
+            </button>
         </div>
 
         <!-- Opsi 1: QRIS -->
@@ -22,16 +28,16 @@
             <img src="qrkk.png" alt="QRIS Kiheo" class="qris-image">
         </div>
 
-        <!-- Terminal Cara Bayar (Background Hitam & Tombol Bulat) -->
+        <!-- Terminal Cara Bayar -->
         <div class="terminal-box">
             <div class="terminal-header">
                 <span class="dot dot-red"></span>
                 <span class="dot dot-yellow"></span>
                 <span class="dot dot-green"></span>
-                <span class="terminal-title">root@kiheo: $ ./cara_bayar</span>
+                <span class="terminal-title">root@kiheo:$ ./cara_bayar</span>
             </div>
             <div class="terminal-body" id="terminal-body">
-                <!-- Teks akan diketik secara otomatis oleh JavaScript di sini -->
+                <!-- Diisi oleh script.js -->
             </div>
         </div>
 
@@ -42,11 +48,9 @@
             
             <a href="dana://" class="btn-action" onclick="bukaDanSalin(event)">
                 <img src="https://upload.wikimedia.org/wikipedia/commons/7/72/Logo_dana_blue.svg" alt="DANA" class="dana-logo">
-  
             </a>
             <p class="note">*(Klik tombol di atas untuk menyalin nomor otomatis)</p>
             <p class="note">*(A/n <b>KIKI HENDRI PRASETYO</b>)</p>
-          
         </div>
 
         <!-- Ucapan Terima Kasih -->
@@ -55,69 +59,13 @@
             <p>Atas kepercayaan Anda berbelanja di Kiheo.</p>
         </div>
 
-        <!-- Kotak Cyan (SATU QRIS UNTUK SEMUA) -->
-        <div class="cyan-box">
+        <!-- Kotak Bawah (Warna Mint/Teal seperti tombol Salin) -->
+        <div class="mint-box">
             SATU <b>QRIS</b> UNTUK SEMUA
         </div>
     </div>
 
-    <script>
-        // Copy No DANA
-        function bukaDanSalin(event) {
-            const noDana = "083170500002";
-            navigator.clipboard.writeText(noDana).then(() => {
-                alert("Nomor DANA " + noDana + " berhasil disalin!\n\nSilakan 'Paste' (Tempel) di aplikasi DANA dan masukkan nominal.");
-            }).catch(err => console.error('Gagal menyalin: ', err));
-        }
-
-        // --- SCRIPT ANIMASI MENGETIK AUTOMATIS DENGAN REPEAT 2 DETIK ---
-        const lines = [
-            "✓ 1. Buka M-Banking/E-Wallet",
-            "✓ 2. Scan QR Code di atas",
-            "✓ 3. Masukkan Nominal",
-            "✓ Menunggu pembayaran..."
-        ];
-
-        const terminalBody = document.getElementById("terminal-body");
-
-        async function typeWriterLoop() {
-            while (true) {
-                terminalBody.innerHTML = ""; // Bersihkan terminal saat mengulang
-                
-                for (let i = 0; i < lines.length; i++) {
-                    const lineDiv = document.createElement("div");
-                    lineDiv.className = "terminal-line";
-                    
-                    // Beri warna hijau pada tanda centang
-                    if (lines[i].startsWith("✓")) {
-                        lineDiv.innerHTML = '<span class="text-green">✓</span> ';
-                    }
-                    
-                    terminalBody.appendChild(lineDiv);
-                    
-                    const textToType = lines[i].replace("✓ ", "");
-                    
-                    // Mengetik per karakter
-                    for (let char of textToType) {
-                        lineDiv.innerHTML += char;
-                        await new Promise(r => setTimeout(r, 60)); // Kecepatan ketik per huruf
-                    }
-
-                    // Tambahkan kursor pada baris terakhir
-                    if (i === lines.length - 1) {
-                        lineDiv.innerHTML += ' <span class="cursor">_</span>';
-                    }
-                    
-                    await new Promise(r => setTimeout(r, 300)); // Jeda antar baris
-                }
-
-                // Tunggu 2 detik setelah semua teks selesai diketik sebelum mengulang
-                await new Promise(r => setTimeout(r, 3000));
-            }
-        }
-
-        // Jalankan animasi saat halaman selesai dimuat
-        window.onload = typeWriterLoop;
-    </script>
+    <!-- Menghubungkan file JavaScript eksternal -->
+    <script src="script.js"></script>
 </body>
 </html>
