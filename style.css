@@ -5,7 +5,7 @@
     --card-bg: #ffffff;
     --border-color: #000000;
     --primary-yellow: #ffc933;
-    --cyan-color: #06b6d4; /* Warna Cyan */
+    --cyan-color: #06b6d4;
     --red-color: #ef4444;
     --shadow: 6px 6px 0px #000000;
     --radius: 8px;
@@ -66,7 +66,7 @@ body {
     color: var(--primary-yellow);
 }
 
-/* Label Section */
+/* Section Label */
 .section-label {
     font-size: 1rem;
     font-weight: bold;
@@ -74,7 +74,7 @@ body {
     color: var(--border-color);
 }
 
-/* Kotak Konten (QRIS & DANA) */
+/* Kotak Konten */
 .content-box {
     border: var(--border-thick) solid var(--border-color);
     border-radius: var(--radius);
@@ -100,36 +100,64 @@ body {
     border-radius: 4px;
 }
 
-/* --- CARA BAYAR (PLAIN TEXT & ANIMASI) --- */
-.plain-terminal {
-    font-size: 0.85rem;
-    line-height: 1.6;
+/* --- KOTAK TERMINAL HITAM (GAYA GAMBAR REFERENSI) --- */
+.terminal-box {
+    background-color: #0f172a; /* Latar belakang hitam gelap terminal */
+    border: var(--border-thick) solid var(--border-color);
+    border-radius: 12px;
+    box-shadow: var(--shadow);
     margin-bottom: 25px;
-    color: #000;
+    overflow: hidden;
+}
+
+.terminal-header {
+    background-color: #1e293b;
+    padding: 10px 15px;
+    display: flex;
+    align-items: center;
+    border-bottom: 2px solid var(--border-color);
+    gap: 8px;
+}
+
+.dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    border: 1px solid #000;
+    display: inline-block;
+}
+
+.dot-red { background-color: #ff5f56; }
+.dot-yellow { background-color: #ffbd2e; }
+.dot-green { background-color: #27c93f; }
+
+.terminal-title {
+    color: #f8fafc;
+    font-size: 0.8rem;
+    font-weight: bold;
+    margin-left: 5px;
+}
+
+.terminal-body {
+    padding: 18px;
+    color: #e2e8f0;
+    font-size: 0.8rem;
+    line-height: 1.8;
+    min-height: 140px;
 }
 
 .terminal-line {
-    display: block;
-    overflow: hidden;
-    white-space: nowrap;
-    max-width: 0;
+    margin-bottom: 6px;
 }
 
-/* Animasi mengetik berurutan */
-.line-0 { animation: typeText 1s steps(40, end) 0s forwards; }
-.line-1 { animation: typeText 1s steps(40, end) 1s forwards; }
-.line-2 { animation: typeText 1s steps(40, end) 2s forwards; }
-.line-3 { animation: typeText 1s steps(40, end) 3s forwards; }
-.line-4 { animation: typeText 1s steps(40, end) 4s forwards; }
-
-@keyframes typeText {
-    from { max-width: 0; }
-    to { max-width: 100%; }
+.text-green {
+    color: #4ade80;
+    font-weight: bold;
 }
 
 .cursor-block {
+    color: #4ade80;
     animation: blink 1s step-end infinite;
-    margin-left: 5px;
 }
 
 @keyframes blink {
@@ -176,7 +204,7 @@ body {
     color: #555;
 }
 
-/* --- UCAPAN TERIMA KASIH PLAIN TEXT --- */
+/* --- UCAPAN TERIMA KASIH --- */
 .thank-you-plain {
     margin-top: 10px;
     margin-bottom: 20px;
@@ -193,7 +221,7 @@ body {
     color: #000;
 }
 
-/* --- KOTAK CYAN (SATU QRIS) --- */
+/* --- KOTAK CYAN (SATU QRIS UNTUK SEMUA) --- */
 .cyan-box {
     background-color: var(--cyan-color);
     color: #000000;
