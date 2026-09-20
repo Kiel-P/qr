@@ -8,72 +8,72 @@
 </head>
 <body>
 
-    <!-- Kontainer Pembungkus untuk mengatur posisi -->
-    <div class="main-wrapper">
-        <div class="payment-card">
-            <!-- Bagian Header -->
-            <div class="header">
-                <div class="header-left">
-                    <div class="red-box"></div>
-                    <h1>root@kiheo:~# <span class="cursor">_</span></h1>
-                </div>
-                <button class="theme-toggle" id="theme-toggle" title="Ubah Tema">
-                    <span id="theme-icon">🌙</span>
-                </button>
+    <!-- KOTAK UTAMA (PAYMENT CARD) -->
+    <div class="payment-card">
+        <!-- Bagian Header -->
+        <div class="header">
+            <div class="header-left">
+                <div class="red-box"></div>
+                <h1>root@kiheo:~# <span class="cursor">_</span></h1>
             </div>
+            <!-- Tombol Switch Tema -->
+            <button class="theme-toggle" id="theme-toggle" title="Ubah Tema">
+                <span id="theme-icon">🌙</span>
+            </button>
+        </div>
 
-            <!-- Opsi 1: QRIS -->
-            <div class="section-label">1. SCAN QRIS:</div>
-            <div class="content-box qris-box">
-                <p class="subtitle">NMID: ID1022202979418</p>
-                <a href="qrkk.png" download="QRIS_Kiheo.png" class="download-link" title="Klik untuk unduh">
-                    <img src="qrkk.png" alt="QRIS Kiheo" class="qris-image">
-                    <div class="download-hint">↓ KLIK UNTUK UNDUH QR ↓</div>
-                </a>
+        <!-- Opsi 1: QRIS -->
+        <div class="section-label">1. SCAN QRIS:</div>
+        <div class="content-box qris-box">
+            <p class="subtitle">NMID: ID1022202979418</p>
+            <a href="qrkk.png" download="QRIS_Kiheo.png" class="download-link" title="Klik untuk unduh">
+                <img src="qrkk.png" alt="QRIS Kiheo" class="qris-image">
+                <div class="download-hint">↓ KLIK UNTUK UNDUH QR ↓</div>
+            </a>
+        </div>
+
+        <!-- Terminal Cara Bayar -->
+        <div class="terminal-box">
+            <div class="terminal-header">
+                <span class="dot dot-red"></span>
+                <span class="dot dot-yellow"></span>
+                <span class="dot dot-green"></span>
+                <span class="terminal-title">root@kiheo: $ ./cara_bayar</span>
             </div>
-
-            <!-- Terminal Cara Bayar -->
-            <div class="terminal-box">
-                <div class="terminal-header">
-                    <span class="dot dot-red"></span>
-                    <span class="dot dot-yellow"></span>
-                    <span class="dot dot-green"></span>
-                    <span class="terminal-title">root@kiheo: $ ./cara_bayar</span>
-                </div>
-                <div class="terminal-body" id="terminal-body">
-                    <!-- Teks diketik otomatis -->
-                </div>
-            </div>
-
-            <!-- Opsi 2: Transfer DANA -->
-            <div class="section-label">2. ALTERNATIF TRANSFER:</div>
-            <div class="content-box dana-box">
-                <p class="subtitle">Jika QRIS gagal, transfer ke <b>DANA</b></p>
-                <a href="dana://" class="btn-action" onclick="bukaDanSalin(event)">
-                    <img src="https://upload.wikimedia.org/wikipedia/commons/7/72/Logo_dana_blue.svg" alt="DANA" class="dana-logo">
-                </a>
-                <p class="note">*(Klik tombol di atas untuk menyalin nomor otomatis)</p>
-                <p class="note">*(A/n <b>KIKI HENDRI PRASETYO</b>)</p>
-            </div>
-
-            <!-- Ucapan Terima Kasih -->
-            <div class="thank-you-plain">
-                <h3>TERIMA KASIH!_</h3>
-                <p>Atas kepercayaan Anda berbelanja di Kiheo.</p>
-            </div>
-
-            <!-- Kotak Bawah (Mint) -->
-            <div class="mint-box">
-                SATU <b>QRIS</b> UNTUK SEMUA
+            <div class="terminal-body" id="terminal-body">
+                <!-- Teks akan diketik otomatis oleh script.js -->
             </div>
         </div>
 
-        <!-- FOOTER PALING BAWAH (Di luar kotak utama) -->
-        <div class="footer-container">
-            <div class="footer">
-                &copy;2026 // KIHEO<br>
-                LAMPUNG, INDONESIA
-            </div>
+        <!-- Opsi 2: Transfer DANA -->
+        <div class="section-label">2. ALTERNATIF TRANSFER:</div>
+        <div class="content-box dana-box">
+            <p class="subtitle">Jika QRIS gagal, transfer ke <b>DANA</b></p>
+            <a href="dana://" class="btn-action" onclick="bukaDanSalin(event)">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/7/72/Logo_dana_blue.svg" alt="DANA" class="dana-logo">
+            </a>
+            <p class="note">*(Klik tombol di atas untuk menyalin nomor otomatis)</p>
+            <p class="note">*(A/n <b>KIKI HENDRI PRASETYO</b>)</p>
+        </div>
+
+        <!-- Ucapan Terima Kasih -->
+        <div class="thank-you-plain">
+            <h3>TERIMA KASIH!_</h3>
+            <p>Atas kepercayaan Anda berbelanja di Kiheo.</p>
+        </div>
+
+        <!-- Kotak Bawah (Warna Mint/Teal) -->
+        <div class="mint-box">
+            SATU <b>QRIS</b> UNTUK SEMUA
+        </div>
+    </div> 
+    <!-- AKHIR KOTAK UTAMA -->
+
+    <!-- FOOTER PALING BAWAH (KOTAK TERPISAH) -->
+    <div class="footer-container">
+        <div class="footer-box">
+            &copy;2026 // KIHEO<br>
+            LAMPUNG, INDONESIA
         </div>
     </div>
 
@@ -86,6 +86,7 @@
         </div>
     </div>
 
+    <!-- Menghubungkan file JavaScript -->
     <script src="script.js"></script>
 </body>
 </html>
