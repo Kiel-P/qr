@@ -24,11 +24,9 @@ function showToast(message) {
     const toast = document.getElementById('toast-notification');
     const toastMsg = document.getElementById('toast-message');
     
-    // Ganti isi pesan dan tampilkan
     toastMsg.innerHTML = message;
     toast.classList.add('toast-show');
 
-    // Hilangkan notifikasi secara otomatis setelah 3.5 detik
     setTimeout(() => {
         toast.classList.remove('toast-show');
     }, 3500);
@@ -36,11 +34,13 @@ function showToast(message) {
 
 // --- FUNGSI COPY NOMOR DANA ---
 function bukaDanSalin(event) {
+    // Mencegah halaman melompat ke atas karena tag href="#"
+    event.preventDefault(); 
+    
     const noDana = "083170500002";
     
     navigator.clipboard.writeText(noDana).then(() => {
-        // Panggil notifikasi kustom, BUKAN alert() standar
-        showToast(`Nomor DANA <b>${noDana}</b> berhasil disalin!<br><br>Silakan Tempel di Aplikasi DANA.`);
+        showToast(`Nomor DANA <b>${noDana}</b> berhasil disalin!<br><br>Silakan buka dan Tempel di Aplikasi DANA.`);
     }).catch(err => {
         console.error('Gagal menyalin: ', err);
         showToast(`Sistem gagal menyalin nomor.<br>Silakan salin manual.`);
@@ -79,7 +79,7 @@ async function typeWriterLoop() {
             }
 
             if (i === lines.length - 1) {
-                lineDiv.innerHTML += ' <span class="cursor-block">█</span>';
+                lineDiv.innerHTML += ' <span class="cursor">_</span>';
             }
             
             await new Promise(r => setTimeout(r, 300)); 
