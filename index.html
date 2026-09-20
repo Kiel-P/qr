@@ -22,12 +22,17 @@
             <img src="qrkk.png" alt="QRIS Kiheo" class="qris-image">
         </div>
 
-        <!-- Cara Bayar (Gaya Plain Text dengan Animasi Mengetik) -->
-        <div class="plain-terminal">
-            <div class="terminal-line line-0">root@kiheo: $ ./cara_bayar</div>
-            <div class="terminal-line line-1">✓ 1. Buka M-Banking/E-Wallet</div>
-            <div class="terminal-line line-2">✓ 2. Scan QR Code di atas</div>
-            <div class="terminal-line line-3">✓ 3. Masukkan Nominal</div>
+        <!-- Terminal Cara Bayar (Background Hitam & Tombol Bulat) -->
+        <div class="terminal-box">
+            <div class="terminal-header">
+                <span class="dot dot-red"></span>
+                <span class="dot dot-yellow"></span>
+                <span class="dot dot-green"></span>
+                <span class="terminal-title">root@kiheo: $ ./cara_bayar</span>
+            </div>
+            <div class="terminal-body" id="terminal-body">
+                <!-- Teks akan diketik secara otomatis oleh JavaScript di sini -->
+            </div>
         </div>
 
         <!-- Opsi 2: Transfer DANA -->
@@ -37,12 +42,14 @@
             
             <a href="dana://" class="btn-action" onclick="bukaDanSalin(event)">
                 <img src="https://upload.wikimedia.org/wikipedia/commons/7/72/Logo_dana_blue.svg" alt="DANA" class="dana-logo">
-                
+  
             </a>
             <p class="note">*(Klik tombol di atas untuk menyalin nomor otomatis)</p>
+            <p class="note">*(A/n <b>KIKI HENDRI PRASETYO</b>)</p>
+          
         </div>
 
-        <!-- Ucapan Terima Kasih (Plain Text) -->
+        <!-- Ucapan Terima Kasih -->
         <div class="thank-you-plain">
             <h3>TERIMA KASIH!_</h3>
             <p>Atas kepercayaan Anda berbelanja di Kiheo.</p>
@@ -54,17 +61,63 @@
         </div>
     </div>
 
-    <!-- Script Copy DANA -->
     <script>
+        // Copy No DANA
         function bukaDanSalin(event) {
             const noDana = "083170500002";
-            
             navigator.clipboard.writeText(noDana).then(() => {
-                alert("Nomor DANA " + noDana + " berhasil disalin!\n\nSilakan 'Paste' (Tempel) di aplikasi DANA dan masukkan nominal pembayaran.");
-            }).catch(err => {
-                console.error('Gagal menyalin: ', err);
-            });
+                alert("Nomor DANA " + noDana + " berhasil disalin!\n\nSilakan 'Paste' (Tempel) di aplikasi DANA dan masukkan nominal.");
+            }).catch(err => console.error('Gagal menyalin: ', err));
         }
+
+        // --- SCRIPT ANIMASI MENGETIK AUTOMATIS DENGAN REPEAT 2 DETIK ---
+        const lines = [
+            "✓ 1. Buka M-Banking/E-Wallet",
+            "✓ 2. Scan QR Code di atas",
+            "✓ 3. Masukkan Nominal",
+            "✓ Menunggu pembayaran..."
+        ];
+
+        const terminalBody = document.getElementById("terminal-body");
+
+        async function typeWriterLoop() {
+            while (true) {
+                terminalBody.innerHTML = ""; // Bersihkan terminal saat mengulang
+                
+                for (let i = 0; i < lines.length; i++) {
+                    const lineDiv = document.createElement("div");
+                    lineDiv.className = "terminal-line";
+                    
+                    // Beri warna hijau pada tanda centang
+                    if (lines[i].startsWith("✓")) {
+                        lineDiv.innerHTML = '<span class="text-green">✓</span> ';
+                    }
+                    
+                    terminalBody.appendChild(lineDiv);
+                    
+                    const textToType = lines[i].replace("✓ ", "");
+                    
+                    // Mengetik per karakter
+                    for (let char of textToType) {
+                        lineDiv.innerHTML += char;
+                        await new Promise(r => setTimeout(r, 60)); // Kecepatan ketik per huruf
+                    }
+
+                    // Tambahkan kursor pada baris terakhir
+                    if (i === lines.length - 1) {
+                        lineDiv.innerHTML += ' <span class="cursor">_</span>';
+                    }
+                    
+                    await new Promise(r => setTimeout(r, 300)); // Jeda antar baris
+                }
+
+                // Tunggu 2 detik setelah semua teks selesai diketik sebelum mengulang
+                await new Promise(r => setTimeout(r, 3000));
+            }
+        }
+
+        // Jalankan animasi saat halaman selesai dimuat
+        window.onload = typeWriterLoop;
     </script>
 </body>
 </html>
