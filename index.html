@@ -15,7 +15,6 @@
                 <div class="red-box"></div>
                 <h1>root@kiheo:~# <span class="cursor">_</span></h1>
             </div>
-            <!-- Tombol Switch Tema di kanan -->
             <button class="theme-toggle" id="theme-toggle" title="Ubah Tema">
                 <span id="theme-icon">🌙</span>
             </button>
@@ -25,7 +24,12 @@
         <div class="section-label">1. SCAN QRIS:</div>
         <div class="content-box qris-box">
             <p class="subtitle">NMID: ID1022202979418</p>
-            <img src="qrkk.png" alt="QRIS Kiheo" class="qris-image">
+            
+            <!-- Link Unduh Otomatis Saat QR Ditekan -->
+            <a href="qrkk.png" download="QRIS_Kiheo.png" class="download-link" title="Klik untuk unduh">
+                <img src="qrkk.png" alt="QRIS Kiheo" class="qris-image">
+                <div class="download-hint">↓ KLIK UNTUK UNDUH QR ↓</div>
+            </a>
         </div>
 
         <!-- Terminal Cara Bayar -->
@@ -34,10 +38,10 @@
                 <span class="dot dot-red"></span>
                 <span class="dot dot-yellow"></span>
                 <span class="dot dot-green"></span>
-                <span class="terminal-title">root@kiheo:$ ./cara_bayar</span>
+                <span class="terminal-title">root@kiheo: $ ./cara_bayar</span>
             </div>
             <div class="terminal-body" id="terminal-body">
-                <!-- Diisi oleh script.js -->
+                <!-- Teks akan diketik otomatis oleh script.js -->
             </div>
         </div>
 
@@ -46,6 +50,7 @@
         <div class="content-box dana-box">
             <p class="subtitle">Jika QRIS gagal, transfer ke <b>DANA</b></p>
             
+            <!-- Link Buka Aplikasi DANA -->
             <a href="dana://" class="btn-action" onclick="bukaDanSalin(event)">
                 <img src="https://upload.wikimedia.org/wikipedia/commons/7/72/Logo_dana_blue.svg" alt="DANA" class="dana-logo">
             </a>
@@ -59,13 +64,23 @@
             <p>Atas kepercayaan Anda berbelanja di Kiheo.</p>
         </div>
 
-        <!-- Kotak Bawah (Warna Mint/Teal seperti tombol Salin) -->
+        <!-- Kotak Bawah (Warna Mint/Teal) -->
         <div class="mint-box">
             SATU <b>QRIS</b> UNTUK SEMUA
         </div>
     </div>
 
-    <!-- Menghubungkan file JavaScript eksternal -->
+    <!-- NOTIFIKASI KUSTOM (Pop-up Toast Terminal) -->
+    <div id="toast-notification" class="toast-hidden">
+        <div class="toast-header">
+            <span class="dot dot-green"></span> SYSTEM_MSG
+        </div>
+        <div class="toast-body" id="toast-message">
+            <!-- Pesan notifikasi akan masuk ke sini -->
+        </div>
+    </div>
+
+    <!-- Menghubungkan file JavaScript -->
     <script src="script.js"></script>
 </body>
 </html>
