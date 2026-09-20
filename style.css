@@ -7,7 +7,7 @@
     --text-color: #000000;
     --border-color: #000000;
     --primary-yellow: #ffc933;
-    --mint-color: #6ee7b7; /* Warna Mint/Teal */
+    --mint-color: #6ee7b7;
     --red-color: #ef4444;
     --box-bg: #ffffff;
     --shadow-size: 6px;
@@ -44,13 +44,11 @@ body {
     transition: background-color 0.3s ease, color 0.3s ease;
 }
 
-/* --- KOTAK UTAMA (RESPONSIF) --- */
 .payment-card {
     background: var(--card-bg);
     border: 4px solid var(--border-color);
     box-shadow: 10px 10px 0px var(--border-color);
     width: 100%;
-    /* Default untuk PC/Desktop: Lebar maksimal lebih besar agar lega */
     max-width: 600px; 
     padding: 30px;
     position: relative;
@@ -135,16 +133,52 @@ body {
     color: var(--text-color);
 }
 
+/* --- GAMBAR QRIS (EFEK UNDUH NEO-BRUTALISM) --- */
 .qris-box {
     text-align: center;
 }
 
+.download-link {
+    display: inline-flex;
+    flex-direction: column;
+    align-items: center;
+    text-decoration: none;
+    cursor: pointer;
+    transition: transform 0.1s ease;
+}
+
+.download-link:active {
+    transform: translate(4px, 4px); /* Efek tombol ditekan */
+}
+
 .qris-image {
     width: 100%;
-    /* Di PC, QRIS sedikit lebih besar, di HP nanti akan dikecilkan via Media Query */
     max-width: 280px; 
     border: 2px solid var(--border-color);
     border-radius: 4px;
+    box-shadow: 4px 4px 0px var(--border-color);
+    transition: box-shadow 0.1s ease;
+}
+
+.download-link:active .qris-image {
+    box-shadow: 0px 0px 0px var(--border-color); /* Bayangan hilang saat ditekan */
+}
+
+.download-hint {
+    font-size: 0.8rem;
+    font-weight: bold;
+    margin-top: 15px;
+    color: #000;
+    background-color: var(--primary-yellow);
+    padding: 5px 15px;
+    border: 2px solid var(--border-color);
+    border-radius: 4px;
+    box-shadow: 2px 2px 0px var(--border-color);
+    transition: box-shadow 0.1s ease;
+}
+
+.download-link:active .download-hint {
+    box-shadow: 0px 0px 0px var(--border-color);
 }
 
 /* --- KOTAK TERMINAL --- */
@@ -285,137 +319,82 @@ body {
 }
 
 /* ========================================================= */
-/* MEDIA QUERIES UNTUK RESPONSIVITAS (Tablet & Handphone) */
+/* NOTIFIKASI KUSTOM TOAST TERMINAL POP-UP */
 /* ========================================================= */
-
-/* 1. Pengaturan untuk TABLET (Layar Menengah) */
-@media screen and (max-width: 768px) {
-    .payment-card {
-        max-width: 500px;
-        padding: 25px;
-    }
-    .header h1 {
-        font-size: 1.2rem;
-    }
-    .qris-image {
-        max-width: 250px;
-    }
-    .terminal-body {
-        font-size: 0.85rem;
-        min-height: 150px;
-    }
-    .btn-action {
-        font-size: 1rem;
-        padding: 15px;
-    }
+#toast-notification {
+    position: fixed;
+    bottom: -150px; /* Sembunyi di bawah layar secara default */
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--card-bg);
+    border: var(--border-thick) solid var(--border-color);
+    box-shadow: 6px 6px 0px var(--border-color);
+    border-radius: var(--radius);
+    width: 90%;
+    max-width: 400px;
+    z-index: 9999;
+    overflow: hidden;
+    /* Animasi memantul seperti karet saat muncul */
+    transition: bottom 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
 }
 
-/* 2. Pengaturan untuk HANDPHONE (Layar Kecil) */
+#toast-notification.toast-show {
+    bottom: 30px; /* Muncul ke atas */
+}
+
+.toast-header {
+    background-color: var(--border-color);
+    color: var(--card-bg);
+    padding: 6px 12px;
+    font-size: 0.85rem;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.toast-body {
+    padding: 20px 15px;
+    font-size: 0.95rem;
+    color: var(--text-color);
+    font-weight: bold;
+    text-align: center;
+    line-height: 1.5;
+}
+
+/* ========================================================= */
+/* MEDIA QUERIES UNTUK RESPONSIVITAS (Tablet & Handphone) */
+/* ========================================================= */
+@media screen and (max-width: 768px) {
+    .payment-card { max-width: 500px; padding: 25px; }
+    .header h1 { font-size: 1.2rem; }
+    .qris-image { max-width: 250px; }
+    .terminal-body { font-size: 0.85rem; min-height: 150px; }
+    .btn-action { font-size: 1rem; padding: 15px; }
+}
+
 @media screen and (max-width: 480px) {
-    body {
-        padding: 10px; /* Mengurangi jarak pinggir di layar kecil */
-    }
-    
-    .payment-card {
-        padding: 20px;
-        border-width: 3px;
-        box-shadow: 6px 6px 0px var(--border-color);
-    }
-    
-    .header {
-        padding-bottom: 10px;
-        margin-bottom: 20px;
-    }
-
-    .header-left {
-        gap: 10px;
-    }
-
-    .red-box {
-        width: 16px;
-        height: 16px;
-    }
-
-    .header h1 {
-        font-size: 0.95rem; /* Font header lebih kecil agar muat */
-    }
-
-    .theme-toggle {
-        padding: 4px 10px;
-        font-size: 1rem;
-        box-shadow: 2px 2px 0px var(--border-color);
-    }
-
-    .section-label {
-        font-size: 0.95rem;
-    }
-
-    .content-box {
-        padding: 15px;
-        border-width: 2px;
-        margin-bottom: 15px;
-    }
-
-    .qris-image {
-        max-width: 200px; /* QRIS lebih kecil di HP */
-    }
-
-    .subtitle, .note {
-        font-size: 0.75rem;
-    }
-
-    .terminal-box {
-        margin-bottom: 20px;
-        border-width: 2px;
-    }
-
-    .terminal-header {
-        padding: 8px 12px;
-    }
-
-    .dot {
-        width: 10px;
-        height: 10px;
-    }
-
-    .terminal-title {
-        font-size: 0.75rem;
-    }
-
-    .terminal-body {
-        padding: 15px;
-        font-size: 0.75rem;
-        min-height: 130px;
-    }
-
-    .btn-action {
-        font-size: 0.9rem;
-        padding: 12px;
-        border-width: 2px;
-        box-shadow: 4px 4px 0px #000000;
-    }
-
-    .dana-logo {
-        height: 20px;
-    }
-
-    .thank-you-plain {
-        margin-top: 10px;
-        margin-bottom: 20px;
-    }
-
-    .thank-you-plain h3 {
-        font-size: 1.1rem;
-    }
-
-    .thank-you-plain p {
-        font-size: 0.85rem;
-    }
-
-    .mint-box {
-        padding: 12px;
-        font-size: 0.95rem;
-        border-width: 2px;
-        box-shadow: 4px 4px 0px #000000;
-    }
+    body { padding: 10px; }
+    .payment-card { padding: 20px; border-width: 3px; box-shadow: 6px 6px 0px var(--border-color); }
+    .header { padding-bottom: 10px; margin-bottom: 20px; }
+    .header-left { gap: 10px; }
+    .red-box { width: 16px; height: 16px; }
+    .header h1 { font-size: 0.95rem; }
+    .theme-toggle { padding: 4px 10px; font-size: 1rem; box-shadow: 2px 2px 0px var(--border-color); }
+    .section-label { font-size: 0.95rem; }
+    .content-box { padding: 15px; border-width: 2px; margin-bottom: 15px; }
+    .qris-image { max-width: 200px; }
+    .subtitle, .note, .download-hint { font-size: 0.75rem; }
+    .terminal-box { margin-bottom: 20px; border-width: 2px; }
+    .terminal-header { padding: 8px 12px; }
+    .dot { width: 10px; height: 10px; }
+    .terminal-title { font-size: 0.75rem; }
+    .terminal-body { padding: 15px; font-size: 0.75rem; min-height: 130px; }
+    .btn-action { font-size: 0.9rem; padding: 12px; border-width: 2px; box-shadow: 4px 4px 0px #000000; }
+    .dana-logo { height: 20px; }
+    .thank-you-plain { margin-top: 10px; margin-bottom: 20px; }
+    .thank-you-plain h3 { font-size: 1.1rem; }
+    .thank-you-plain p { font-size: 0.85rem; }
+    .mint-box { padding: 12px; font-size: 0.95rem; border-width: 2px; box-shadow: 4px 4px 0px #000000; }
+    #toast-notification { border-width: 2px; box-shadow: 4px 4px 0px var(--border-color); }
 }
