@@ -7,10 +7,11 @@
     --text-color: #000000;
     --border-color: #000000;
     --primary-yellow: #ffc933;
-    --mint-color: #6ee7b7; /* Warna Mint/Teal seperti tombol Salin */
+    --mint-color: #6ee7b7; /* Warna Mint/Teal */
     --red-color: #ef4444;
     --box-bg: #ffffff;
-    --shadow: 6px 6px 0px #000000;
+    --shadow-size: 6px;
+    --shadow: var(--shadow-size) var(--shadow-size) 0px #000000;
     --radius: 8px;
     --border-thick: 3px;
 }
@@ -22,7 +23,7 @@ body.dark-mode {
     --text-color: #ffffff;
     --border-color: #ffffff;
     --box-bg: #2d2d2d;
-    --shadow: 6px 6px 0px #ffffff;
+    --shadow: var(--shadow-size) var(--shadow-size) 0px #ffffff;
 }
 
 * {
@@ -43,13 +44,15 @@ body {
     transition: background-color 0.3s ease, color 0.3s ease;
 }
 
+/* --- KOTAK UTAMA (RESPONSIF) --- */
 .payment-card {
     background: var(--card-bg);
     border: 4px solid var(--border-color);
     box-shadow: 10px 10px 0px var(--border-color);
-    max-width: 480px;
     width: 100%;
-    padding: 25px;
+    /* Default untuk PC/Desktop: Lebar maksimal lebih besar agar lega */
+    max-width: 600px; 
+    padding: 30px;
     position: relative;
     transition: all 0.3s ease;
 }
@@ -58,7 +61,7 @@ body {
 .header {
     display: flex;
     align-items: center;
-    justify-content: space-between; /* Membuat elemen berjauhan (kiri dan kanan) */
+    justify-content: space-between;
     border-bottom: 2px solid var(--border-color);
     padding-bottom: 15px;
     margin-bottom: 25px;
@@ -79,7 +82,7 @@ body {
 }
 
 .header h1 {
-    font-size: 1.1rem; /* Ukuran font disesuaikan agar rapi di HP */
+    font-size: 1.3rem;
     font-weight: bold;
     color: var(--text-color);
 }
@@ -89,7 +92,6 @@ body {
     color: var(--primary-yellow);
 }
 
-/* Tombol Switch Mode */
 .theme-toggle {
     background: var(--card-bg);
     border: 2px solid var(--border-color);
@@ -97,12 +99,12 @@ body {
     padding: 6px 14px;
     border-radius: 20px;
     cursor: pointer;
-    font-size: 1.1rem;
+    font-size: 1.2rem;
     display: flex;
     align-items: center;
     justify-content: center;
     transition: all 0.2s ease;
-    flex-shrink: 0; /* Mencegah tombol mengecil di layar sempit */
+    flex-shrink: 0;
 }
 
 .theme-toggle:active {
@@ -112,22 +114,22 @@ body {
 
 /* --- LAYOUT UMUM --- */
 .section-label {
-    font-size: 1rem;
+    font-size: 1.1rem;
     font-weight: bold;
-    margin-bottom: 10px;
+    margin-bottom: 12px;
     color: var(--text-color);
 }
 
 .content-box {
     border: var(--border-thick) solid var(--border-color);
     border-radius: var(--radius);
-    padding: 15px;
+    padding: 20px;
     background: var(--box-bg);
-    margin-bottom: 20px;
+    margin-bottom: 25px;
 }
 
 .subtitle {
-    font-size: 0.85rem;
+    font-size: 0.9rem;
     margin-bottom: 15px;
     text-align: center;
     color: var(--text-color);
@@ -139,7 +141,8 @@ body {
 
 .qris-image {
     width: 100%;
-    max-width: 250px;
+    /* Di PC, QRIS sedikit lebih besar, di HP nanti akan dikecilkan via Media Query */
+    max-width: 280px; 
     border: 2px solid var(--border-color);
     border-radius: 4px;
 }
@@ -150,13 +153,13 @@ body {
     border: var(--border-thick) solid var(--border-color);
     border-radius: 12px;
     box-shadow: var(--shadow);
-    margin-bottom: 25px;
+    margin-bottom: 30px;
     overflow: hidden;
 }
 
 .terminal-header {
     background-color: #1e293b;
-    padding: 10px 15px;
+    padding: 12px 18px;
     display: flex;
     align-items: center;
     border-bottom: 2px solid var(--border-color);
@@ -164,8 +167,8 @@ body {
 }
 
 .dot {
-    width: 12px;
-    height: 12px;
+    width: 14px;
+    height: 14px;
     border-radius: 50%;
     border: 1px solid #000;
     display: inline-block;
@@ -177,17 +180,17 @@ body {
 
 .terminal-title {
     color: #f8fafc !important;
-    font-size: 0.8rem;
+    font-size: 0.9rem;
     font-weight: bold;
     margin-left: 5px;
 }
 
 .terminal-body {
-    padding: 18px;
+    padding: 20px;
     color: #f1f5f9 !important;
-    font-size: 0.8rem;
+    font-size: 0.9rem;
     line-height: 1.8;
-    min-height: 140px;
+    min-height: 160px;
 }
 
 .terminal-line {
@@ -219,11 +222,11 @@ body {
     background-color: var(--primary-yellow);
     color: #000000;
     text-decoration: none;
-    padding: 15px;
+    padding: 18px;
     border: var(--border-thick) solid var(--border-color);
     border-radius: var(--radius);
     font-weight: bold;
-    font-size: 1rem;
+    font-size: 1.1rem;
     box-shadow: var(--shadow);
     transition: all 0.1s ease;
     cursor: pointer;
@@ -235,57 +238,184 @@ body {
 }
 
 .dana-logo {
-    height: 20px;
+    height: 24px;
     background-color: #fff;
-    padding: 2px 5px;
+    padding: 3px 6px;
     border-radius: 4px;
     border: 1px solid #000;
 }
 
 .note {
-    font-size: 0.7rem;
+    font-size: 0.8rem;
     text-align: center;
-    margin-top: 10px;
+    margin-top: 12px;
     color: var(--text-color);
 }
 
 /* --- UCAPAN TERIMA KASIH --- */
 .thank-you-plain {
-    margin-top: 10px;
-    margin-bottom: 20px;
+    margin-top: 15px;
+    margin-bottom: 25px;
+    text-align: center;
 }
 
 .thank-you-plain h3 {
-    font-size: 1.1rem;
+    font-size: 1.3rem;
     font-weight: bold;
-    margin-bottom: 5px;
+    margin-bottom: 8px;
     color: var(--text-color);
 }
 
 .thank-you-plain p {
-    font-size: 0.85rem;
+    font-size: 0.95rem;
     color: var(--text-color);
 }
 
-/* --- KOTAK BAWAH (Warna Mint/Teal) --- */
+/* --- KOTAK BAWAH (MINT) --- */
 .mint-box {
     background-color: var(--mint-color);
-    color: #000000; /* Teks tetap hitam agar kontras */
+    color: #000000;
     text-align: center;
-    padding: 12px;
-    font-size: 1rem;
+    padding: 15px;
+    font-size: 1.1rem;
     font-weight: bold;
     border: var(--border-thick) solid var(--border-color);
     border-radius: var(--radius);
     box-shadow: var(--shadow);
 }
 
-/* Penyesuaian untuk layar kecil (HP) */
-@media (max-width: 400px) {
-    .header h1 {
-        font-size: 0.9rem;
+/* ========================================================= */
+/* MEDIA QUERIES UNTUK RESPONSIVITAS (Tablet & Handphone) */
+/* ========================================================= */
+
+/* 1. Pengaturan untuk TABLET (Layar Menengah) */
+@media screen and (max-width: 768px) {
+    .payment-card {
+        max-width: 500px;
+        padding: 25px;
     }
+    .header h1 {
+        font-size: 1.2rem;
+    }
+    .qris-image {
+        max-width: 250px;
+    }
+    .terminal-body {
+        font-size: 0.85rem;
+        min-height: 150px;
+    }
+    .btn-action {
+        font-size: 1rem;
+        padding: 15px;
+    }
+}
+
+/* 2. Pengaturan untuk HANDPHONE (Layar Kecil) */
+@media screen and (max-width: 480px) {
+    body {
+        padding: 10px; /* Mengurangi jarak pinggir di layar kecil */
+    }
+    
+    .payment-card {
+        padding: 20px;
+        border-width: 3px;
+        box-shadow: 6px 6px 0px var(--border-color);
+    }
+    
+    .header {
+        padding-bottom: 10px;
+        margin-bottom: 20px;
+    }
+
     .header-left {
         gap: 10px;
+    }
+
+    .red-box {
+        width: 16px;
+        height: 16px;
+    }
+
+    .header h1 {
+        font-size: 0.95rem; /* Font header lebih kecil agar muat */
+    }
+
+    .theme-toggle {
+        padding: 4px 10px;
+        font-size: 1rem;
+        box-shadow: 2px 2px 0px var(--border-color);
+    }
+
+    .section-label {
+        font-size: 0.95rem;
+    }
+
+    .content-box {
+        padding: 15px;
+        border-width: 2px;
+        margin-bottom: 15px;
+    }
+
+    .qris-image {
+        max-width: 200px; /* QRIS lebih kecil di HP */
+    }
+
+    .subtitle, .note {
+        font-size: 0.75rem;
+    }
+
+    .terminal-box {
+        margin-bottom: 20px;
+        border-width: 2px;
+    }
+
+    .terminal-header {
+        padding: 8px 12px;
+    }
+
+    .dot {
+        width: 10px;
+        height: 10px;
+    }
+
+    .terminal-title {
+        font-size: 0.75rem;
+    }
+
+    .terminal-body {
+        padding: 15px;
+        font-size: 0.75rem;
+        min-height: 130px;
+    }
+
+    .btn-action {
+        font-size: 0.9rem;
+        padding: 12px;
+        border-width: 2px;
+        box-shadow: 4px 4px 0px #000000;
+    }
+
+    .dana-logo {
+        height: 20px;
+    }
+
+    .thank-you-plain {
+        margin-top: 10px;
+        margin-bottom: 20px;
+    }
+
+    .thank-you-plain h3 {
+        font-size: 1.1rem;
+    }
+
+    .thank-you-plain p {
+        font-size: 0.85rem;
+    }
+
+    .mint-box {
+        padding: 12px;
+        font-size: 0.95rem;
+        border-width: 2px;
+        box-shadow: 4px 4px 0px #000000;
     }
 }
